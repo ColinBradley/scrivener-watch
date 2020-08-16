@@ -25,7 +25,7 @@ jobs:
       run: dotnet publish --self-contained=true -p:PublishSingleFile=true -c release -r win-x64 src/ScrivenerWatch.App/ScrivenerWatch.App.csproj
       
     - name: Create zip
-      run: Compress-Archive -Path src/ScrivenerWatch.App/bin/Release/net5.0/publish/* -DestinationPath scrivener-watch-win-x64.zip -CompressionLevel Optimal
+      run: Compress-Archive -Path src/ScrivenerWatch.App/bin/Release/net5.0/win-x64/publish/* -DestinationPath scrivener-watch-win-x64.zip -CompressionLevel Optimal
 
     - name: Create Release
       id: create_release
