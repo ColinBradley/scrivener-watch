@@ -23,6 +23,7 @@
             <TextBox Name="FilePathTextBox" Text="{Binding FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Command="{Binding BrowseFile}">Browse...</Button>
             <Button Command="{Binding AddSnapshot}">Add Snapshot</Button>
+            <Button Command="{Binding MergeFiles}">Merge Selected</Button>
         </StackPanel>
 
         <ContentControl Content="{Binding LatestDifference}" Grid.Row="1" />

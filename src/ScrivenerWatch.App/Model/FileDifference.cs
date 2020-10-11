@@ -31,6 +31,7 @@ namespace ScrivenerWatch.App.Model
                 DifferenceType.Removed => " [D]",
                 DifferenceType.Modified => " [M]",
                 DifferenceType.Equal => "",
+                _ => throw new NotImplementedException(),
             };
 
         public SolidColorBrush DifferenceTypeSuffixBrush
@@ -40,6 +41,7 @@ namespace ScrivenerWatch.App.Model
                 DifferenceType.Removed => sRemovedColor,
                 DifferenceType.Modified => sModifiedColor,
                 DifferenceType.Equal => SystemColors.ControlTextBrush,
+                _ => throw new NotImplementedException(),
             };
 
         public ScivenerEntry? OldFile { get; }
@@ -47,6 +49,8 @@ namespace ScrivenerWatch.App.Model
         public ScivenerEntry? NewFile { get; }
 
         public DifferenceState Difference { get => this.GetDifference(); }
+
+        public bool IsSelected { get; set; }
 
         private DifferenceState GetDifference()
         {
@@ -97,11 +101,15 @@ namespace ScrivenerWatch.App.Model
 
                     var deleted = deleteCount - modified;
                     if (deleted > 0)
+                    {
                         removedCount += deleted;
+                    }
 
                     var inserted = insertCount - modified;
                     if (inserted > 0)
+                    {
                         addedCount += inserted;
+                    }
 
                     continue;
                 }

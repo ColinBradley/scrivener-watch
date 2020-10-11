@@ -1,44 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net5.0</TargetFramework>
-        <UseWPF>true</UseWPF>
-        <UseWindowsForms>true</UseWindowsForms>
-        <Platforms>AnyCPU;x64</Platforms>
-        <Nullable>enable</Nullable>
-        <LangVersion>preview</LangVersion>
-    </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Platforms>AnyCPU;x64</Platforms>
+		<Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <PlatformTarget>AnyCPU</PlatformTarget>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      <PlatformTarget>AnyCPU</PlatformTarget>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <PlatformTarget>AnyCPU</PlatformTarget>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      <PlatformTarget>AnyCPU</PlatformTarget>
-      <DebugType>none</DebugType>
-      <DebugSymbols>false</DebugSymbols>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <None Include="..\.editorconfig" Link=".editorconfig" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DiffPlex" Version="1.6.3" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="DiffPlex" Version="1.6.3" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DiffPlex.Wpf\DiffPlex.Wpf.csproj" />
+		<ProjectReference Include="..\ScrivenerWatch.SourceGenerators\ScrivenerWatch.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	</ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\DiffPlex.Wpf\DiffPlex.Wpf.csproj" />
-        <ProjectReference Include="..\ScrivenerWatch.SourceGenerators\ScrivenerWatch.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    </ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.Office.Interop.Word">
+			<HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\15.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
+			<Private>true</Private>
+		</Reference>
+		<Reference Include="office">
+			<HintPath>C:\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\office.dll</HintPath>
+			<Private>true</Private>
+		</Reference>
+	</ItemGroup>
 
 </Project>

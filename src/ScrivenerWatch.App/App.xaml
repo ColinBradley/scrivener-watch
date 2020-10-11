@@ -89,7 +89,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <ListBox Name="DifferencesListBox" ItemsSource="{Binding AllDifferences, Mode=OneWay}">
+                    <ListBox Name="DifferencesListBox" 
+                             ItemsSource="{Binding AllDifferences, Mode=OneWay}" 
+                             SelectionMode="Extended">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type model:FileDifference}">
                                 <TextBlock>
@@ -98,6 +100,11 @@
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                     </ListBox>
 
                     <diffplex:DiffViewer

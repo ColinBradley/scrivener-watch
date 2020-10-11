@@ -5,6 +5,7 @@ using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ScrivenerWatch.App.Commands;
 using ScrivenerWatch.App.Utils;
@@ -24,11 +25,14 @@ namespace ScrivenerWatch.App.Model
         public ApplicationModel()
         {
             this.BrowseFile = new BrowseForScrivenerLocationCommand(this);
+            this.MergeFiles = new MergeFilesCommand(this);
         }
 
         public ICommand BrowseFile { get; }
 
-        public SnapshotDifference? LatestDifference { get => this.GetLatestDifference(); }
+        public ICommand MergeFiles { get; }
+
+        public SnapshotDifference? LatestDifference => this.GetLatestDifference();
 
         private SnapshotDifference? GetLatestDifference()
         {
@@ -38,7 +42,9 @@ namespace ScrivenerWatch.App.Model
                 var latestSnapshot = this.LatestSnapshot;
 
                 if (lastSnapshot == null || latestSnapshot == null)
+                {
                     return null;
+                }
 
                 mLatestDifference = new SnapshotDifference(lastSnapshot, latestSnapshot);
             }
@@ -52,7 +58,9 @@ namespace ScrivenerWatch.App.Model
             set
             {
                 if (value == mFilePath)
+                {
                     return;
+                }
 
                 mFilePath = value;
 
@@ -86,7 +94,9 @@ namespace ScrivenerWatch.App.Model
             set
             {
                 if (value == mLatestSnapshot)
+                {
                     return;
+                }
 
                 mLatestSnapshot = value;
                 mLatestDifference = null;
@@ -122,14 +132,18 @@ namespace ScrivenerWatch.App.Model
                 await Task.WhenAll(
                     baseEntries.Select(async i =>
                     {
-                        var text = await RichTextUtilities.ReadFromFile(
-                            $"{Path.GetDirectoryName(this.FilePath)}\\Files\\Docs\\{i.Id}.rtf");
+                        var text = await RichTextUtilities.ReadFromFile(this.GetFilePath(i.Id));
 
                         return new ScivenerEntry(i.Id, i.Title, text, TextUtilities.GetWordCount(text));
                     })
                     .ToArray());
 
             return new ScrivenerSnapshot(entries, DateTime.UtcNow);
+        }
+
+        internal string GetFilePath(string id)
+        {
+            return $"{Path.GetDirectoryName(this.FilePath)}\\Files\\Docs\\{id}.rtf";
         }
 
         public void Dispose()

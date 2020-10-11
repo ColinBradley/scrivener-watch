@@ -691,7 +691,7 @@ namespace DiffPlex.Wpf.Controls
             return DependencyProperty.Register(name, typeof(T), typeof(DiffViewer), null);
         }
 
-        private static DependencyProperty RegisterDependencyProperty<T>(string name, T defaultValue, PropertyChangedCallback propertyChangedCallback = null)
+        private static DependencyProperty RegisterDependencyProperty<T>(string name, T defaultValue, PropertyChangedCallback? propertyChangedCallback = null)
         {
             return DependencyProperty.Register(name, typeof(T), typeof(DiffViewer), new PropertyMetadata(defaultValue, propertyChangedCallback));
         }
